@@ -1,0 +1,222 @@
+﻿@model IEnumerable<RMDWEB.Models.ApplicationUser>
+@{
+    ViewData["Title"]="Index";
+    ViewBag.Active="users";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">User</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item active">Users</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<!-- Start Page-content-Wrapper -->
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            <a href="/Identity/Account/Register" class="btn btn-primary mb-3" style="width:155px; letter-spacing:1px;"><i class="mdi mdi-plus"></i>User</a>
+                        </div>
+                    </div>
+                    <table id="datatable" class="table table-sm table-bordered dt-responsive nowrap"
+                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["UserId"]">ID</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FirstName"]">Name</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastName"]">Last Name</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["Email"]">Email</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["UserName"]">Username</a>
+                                </th>
+
+
+                                <th style="color:#20A6E8 !important">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model.OrderByDescending(a => a.UserId))
+                {
+                            <tr>
+                                <td>@user.UserId</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>@user.UserName</td>
+
+                                <td>
+                                        <a asp-controller="UserRole" asp-action="Manage" asp-route-userId="@user.UserId" class="btn btn-sm btn-floating">
+                                            <i class="mdi mdi-cog text-primary" style="font-size:1.1rem"></i>
+                                    </a>
+                                        <a asp-controller="UserRole" asp-action="Details" asp-route-userId="@user.UserId" class="btn btn-sm btn-floating">
+                                            <i class="mdi mdi-information text-primary" style="font-size:1.1rem"></i>
+                                    </a>
+                                        <a asp-controller="UserRole" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-floating">
+                                            <i class="mdi mdi-pencil text-primary" style="font-size:1.1rem"></i>
+                                    </a>
+
+                                        <a onclick="changePassword(event,@user.UserId.Value)" class="btn btn-sm btn-floating">
+                                            <i class="mdi mdi-lock text-primary" style="font-size:1.1rem"></i>
+                                        </a>
+                                </td>
+                            </tr>
+                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end col -->
+    </div>
+</div>
+<!-- End Page-content -->
+
+<!-- Modal -->
+<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button onclick="closeModel()" type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" onclick="closeModel('modal2')">Close</button>
+                <button type="button" class="btn btn-primary" onclick="passConfigSubmit(${ id })" id="submitButtonId" name="submitButtonId">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section css{
+    <!-- DataTables -->
+    <link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+      type="text/css" />
+    <link href="~/mdbootstrap/css/mdb.min.css" rel="stylesheet" />
+}
+
+
+@section Scripts{
+    <!-- Required datatable js -->
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="~/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/jszip/jszip.min.js"></script>
+    <script src="~/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="~/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <!-- Datatable init js -->
+    <script src="~/assets/js/pages/datatables.init.js"></script>
+    <script src="~/mdbootstrap/js/mdb.min.js"></script>
+}
+
+<script>
+
+    $('select').addClass('browser-default select-min-width');
+    var select = $('select').selectize({
+        create: false,
+        sortField: "text",
+    })
+
+
+    function passwordChange(id) {
+        if (confirm('Are you sure')) {
+            $("#fullPageLoading").show()
+            var passwordId = document.getElementById("passwordId").value;
+            var userPassChangeId = document.getElementById("userPassChangeId").value;
+
+            $.ajax({
+                url: '/api/SysConfiguration/changePasswordOfUser?UserId=' + userPassChangeId + '&Password=' + passwordId,
+                method: 'POST',
+                success: (response) => {
+                    $("#fullPageLoading").hide()
+                    M.toast({ html: response, classes: 'bg-red-500 rounded-xl' })
+                    closeModel("modal1");
+                },
+                error: () => {
+                    $("#fullPageLoading").hide()
+                    M.toast({ html: 'Something went wrong', classes: 'bg-red-500 rounded-xl' })
+                }
+            })
+        }
+    }
+
+
+    function changePassword(element, id) {
+        let html = `<p><i class="ri-arrow-right-s-fill"></i>Password should be at least 8 characters long</p>`
+        html += `<p><i class="ri-arrow-right-s-fill"></i>Password should contain at least one capital letter and one symbol</p>`
+        html += `<br/>Example:<span class="text-danger mb-2"> Abc@123</span>`
+        html += `<input  type="hidden" id="userPassChangeId" value="${id}" />`
+        html += `<br/><label>New Password</label>`
+        html += `<input class="form-control" type="password" name="password" id="passwordId" onchange="passwordIdChange()"/><span id="passwordIdError"></span>`
+        html += `<br/><label>Confirm New Password</label>`
+        html += `<input class="form-control mb-2" type="password" name="confirmPassword" id="confirmPasswordId" onchange="passwordIdChange()"/><span id="confirmPasswordIdError"></span>`
+        html += `<button onclick="passwordChange(${id})" class="btn btn-primary m-2" id="submitButtonId" name="submitButtonId">Save Changes</button>`
+        html += `<button class="btn btn-secondary text-center" onclick="closeModel()">Close</button>`
+        $('.modal-body').html(html);
+        $('#modal2').modal('toggle')
+        //document.getElementById( "submitButtonId" ).style.display = "none";
+    }
+
+    function passwordIdChange() {
+        document.getElementById("submitButtonId").style.display = "none";
+        var pw = document.getElementById("passwordId").value;
+        var pw2 = document.getElementById("confirmPasswordId").value;
+        if (pw.length < 8 || pw.length > 15) {
+            document.getElementById("passwordIdError").textContent = "The password must be more than 8 and less than 15 characters.";
+        } else {
+
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+            if (pw.match(passw)) {
+                document.getElementById("passwordIdError").textContent = "The password is correct.";
+                if (pw == pw2) {
+                    document.getElementById("confirmPasswordIdError").textContent = "The password has matched."
+                    document.getElementById("submitButtonId").style.display = "block";
+                } else {
+                    document.getElementById("confirmPasswordIdError").textContent = "The repeat password must be the same as the entered password.";
+                }
+            } else {
+                document.getElementById("passwordIdError").textContent = "It must contain at least one uppercase and lowercase letter.";
+            }
+        }
+    }
+
+    function closeModel() {
+        $('#modal2').modal('hide')
+    }
+
+</script>
+
+

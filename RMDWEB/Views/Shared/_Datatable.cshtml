@@ -1,0 +1,109 @@
+﻿@if(ViewBag.type=="css")
+{
+    <link href="~/Content/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datatable/css/responsive.dataTables.min.css" rel="stylesheet" />
+    if(ViewBag.buttons=="true")
+    {
+        <link href="~/Content/plugins/datatable/css/buttons.dataTables.min.css" rel="stylesheet" />
+    }
+}
+else if(ViewBag.type=="js")
+{
+    <script src="~/Content/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/plugins/datatable/js/dataTables.responsive.min.js"></script>
+    if(ViewBag.buttons=="true")
+    {
+        <script src="~/Content/plugins/datatable/js/dataTables.buttons.min.js"></script>
+        <script src="~/Content/plugins/datatable/js/jszip.min.js"></script>
+        <script src="~/Content/plugins/datatable/js/pdfmake.min.js"></script>
+        <script src="~/Content/plugins/datatable/js/vfs_fonts.js"></script>
+        <script src="~/Content/plugins/datatable/js/buttons.html5.min.js"></script>
+        <script src="~/Content/plugins/datatable/js/buttons.print.min.js"></script>
+        <script src="~/Content/plugins/datatable/js/buttons.colVis.min.js"></script>
+        <script>
+            $( document ).ready( function () {
+
+                $( '.table' ).DataTable( {
+                    "drawCallback": function ( settings ) {
+                        $( '.table' ).show();
+                        $( '#example_info' ).addClass( 'mt-3' );
+                        $( '#example_paginate' ).addClass( 'mt-3' );
+                        $( 'input[type="search"]' ).addClass( 'browser-default' );
+                        $( '.dataTables_wrapper' ).find( 'select' ).addClass( 'browser-default c-select' );
+                        $( '.dt-button' ).removeClass( 'dt-button' ).addClass( 'btn waves-effect transparent black-text btn-small mb-4' );
+                    },
+                    responsive: true,
+                    dom: 'Bfrtip',
+
+                    buttons: [
+                        'pageLength',
+                        {
+                            extend: 'colvis',
+                            className: 'mr-3'
+                        },
+                        'copy', 'csv', 'excel', {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: ':visible',
+                                modifier: { order: 'index' },
+                                format: {
+                                    body: function ( data, row, column, node ) {
+                                        const arabic = /[\u0600-\u06FF]/;
+
+                                        if ( arabic.test( data ) ) {
+                                            return data.split( ' ' ).reverse().join( ' ' );
+                                        }
+                                        return data;
+                                    },
+                                    header: function ( data, row, column, node ) {
+                                        const arabic = /[\u0600-\u06FF]/;
+
+                                        if ( arabic.test( data ) ) {
+                                            return data.split( ' ' ).reverse().join( ' ' );
+                                        }
+                                        return data;
+                                    }
+                                }
+                            }
+                        }, 'print'
+                    ],
+                    columnDefs: [ {
+                        targets: -1,
+                        visibile: false
+                    } ]
+
+                } );
+
+            } );
+        </script>
+    }
+    else if(ViewBag.buttons=="false")
+    {
+        <script>
+            $( document ).ready( function () {
+                $( '.table' ).DataTable( {
+                    responsive: true,
+                    "drawCallback": function ( settings ) {
+                        $( '#example_info' ).addClass( 'mt-3' );
+                        $( '#example_paginate' ).addClass( 'mt-3' );
+                        $( 'input[type="search"]' ).addClass( 'browser-default' );
+                        $( '.dataTables_wrapper' ).find( 'select' ).addClass( 'browser-default c-select' );
+                        $( '.dt-button' ).removeClass( 'dt-button' ).addClass( 'btn waves-effect transparent black-text btn-small mb-4' );
+                        $( '.table' ).show();
+                    },
+                } );
+
+            } );
+        </script>
+    }
+
+    <style>
+        .paginate_button {
+            padding: 5px 10px !important;
+        }
+
+        .dt-button {
+            background: t
+        }
+    </style>
+}

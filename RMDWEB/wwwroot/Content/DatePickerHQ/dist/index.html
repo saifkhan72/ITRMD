@@ -1,0 +1,62 @@
+﻿
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/flatly/bootstrap.min.css">
+<link href="css/bootstrap-datetimepicker.css?v2" rel="stylesheet" />
+
+<style>
+    .hijri-date-default{
+        margin-bottom:200px !important;
+    }
+</style>
+
+
+<input type="text" class="form-control hijri-date-default" />
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.1.2/moment-hijri.min.js"></script>
+<script src="js/bootstrap-hijri-datetimepicker.js?v2"></script>
+
+<script type="text/javascript"> 
+    $(function () { 
+        initHijrDatePicker();
+        initHijrDatePickerDefault();
+        $('.disable-date').hijriDatePicker({
+
+            minDate: "2020-01-01",
+            maxDate: "2021-01-01",
+            viewMode: "years",
+            hijri: true,
+            debug: true
+        });
+
+    });
+    function initHijrDatePicker() {
+        $(".hijri-date-input").hijriDatePicker({
+            locale: "ar-sa",
+            format: "DD-MM-YYYY",
+            hijriFormat: "iYYYY-iMM-iDD",
+            dayViewHeaderFormat: "MMMM YYYY",
+            hijriDayViewHeaderFormat: "iMMMM iYYYY",
+            showSwitcher: true,
+            allowInputToggle: true,
+            showTodayButton: false,
+            useCurrent: true,
+            isRTL: false,
+            viewMode: 'months',
+            keepOpen: false,
+            hijri: false,
+            debug: true,
+            showClear: true,
+            showTodayButton: true,
+            showClose: true
+        });
+    }
+
+    function initHijrDatePickerDefault() {
+
+        $(".hijri-date-default").hijriDatePicker();
+    }
+
+</script>

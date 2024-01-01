@@ -1,0 +1,18 @@
+#datatable{
+    border: 1px solid black;
+}
+#dadatable thead > tr{
+    border-bottom: 1px solid black !important;
+}
+#datatable tr, th, td{
+    padding: 0!important;
+}
+#datatable th, td{
+    padding: 0 10px !important;
+}
+#datatable th, td {
+    border-left: 1px solid #ccc;
+}
+#datatable tr{
+    border-bottom: 1px solid #ccc;
+}

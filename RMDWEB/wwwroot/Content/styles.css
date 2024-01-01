@@ -1,0 +1,259 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local("Material Icons"), local("MaterialIcons-Regular"), url("/Content/plugins/fonts/material-design-icons/MaterialIcons-Regular.ttf") format("truetype"), url("/Content/plugins/fonts/material-design-icons/MaterialIcons-Regular.woff2") format("woff2"), url("/Content/plugins/fonts/material-design-icons/MaterialIcons-Regular.woff") format("woff"), url("/Content/plugins/fonts/material-design-icons/MaterialIcons-Regular.eot");
+}
+
+body {
+    background: rgb(250,250,250);
+}
+
+label {
+    min-width: 140px !important;
+}
+
+
+
+select {
+    max-height: 30px !important;
+    font-size: 15px !important;
+    padding: 0px !important;
+}
+
+
+@media (max-width: 600px) {
+    .f-sm-10 {
+        font-size: 10px;
+    }
+}
+
+#page {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 22222;
+    background: rgba(0,0,0,.6);
+    display: none;
+}
+
+.c-pointer {
+    cursor: pointer !important;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+    /* Rules for sizing the icon. */
+    .material-icons.md-18 {
+        font-size: 18px;
+    }
+
+.web_red {
+    background: #c11417 !important;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+    .material-icons.md-dark.md-inactive {
+        color: rgba(0, 0, 0, 0.26);
+    }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+    color: white;
+}
+
+    .material-icons.md-light.md-inactive {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+#scroll::-webkit-scrollbar {
+    width: 5px;
+    background-color: #ccc;
+}
+
+#scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #ccc;
+}
+
+#content {
+    padding-left: 230px;
+    padding-top: 5px;
+}
+
+@media (max-width: 992px) {
+    #content {
+        padding-left: 0px;
+    }
+
+    .aem-sidebar {
+        display: none;
+    }
+
+    #min-title {
+        display: none;
+    }
+
+    #datatable {
+        font-size: 10px !important;
+    }
+}
+
+th {
+    font-size: 13px !important;
+    border-right: 1px solid #ccc;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+.c-select {
+    width: auto;
+    padding: 0;
+    border: 1px solid #888;
+    border-radius: 2px;
+    height: auto;
+}
+
+td {
+    font-size: 13px;
+    font-weight: 450;
+}
+
+.breadcrumb:before {
+    color: black !important;
+    font-size: 18px;
+    font-weight: 800
+}
+
+.breadcrumb-nav .disabled {
+    color: #aaa;
+}
+
+.breadcrumb {
+    font-size: 15px !important;
+    color: black;
+}
+
+.lactive {
+    transform: rotate(90deg);
+    transition: .5s;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.aem-collapse {
+    width: 0% !important;
+}
+
+.card-title {
+    font-size: 24px !important;
+}
+
+.aem-sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    overflow: auto;
+    z-index: 10;
+    background: white;
+}
+
+.aem-sidebar-items {
+    margin-right: 1px !important;
+}
+
+    .aem-sidebar-items li {
+        display: block !important;
+    }
+
+    .aem-sidebar-items .active {
+        background: dodgerblue;
+        padding: 5px 0px;
+        transition: .4s;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+        .aem-sidebar-items .active a {
+            color: white !important;
+        }
+
+.aem-sidebar-items {
+    padding-right: 0 !important;
+}
+
+    .aem-sidebar-items .active i {
+        color: white !important;
+    }
+
+    .aem-sidebar-items li a, i {
+        color: grey;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+#profile-img {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/**{
+   direction:rtl !important;
+ }*/
+
+.prose p, dev {
+    text-align: left !important;
+    direction: ltr !important;
+}
+

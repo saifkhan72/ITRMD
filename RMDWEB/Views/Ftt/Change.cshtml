@@ -1,0 +1,294 @@
+﻿@model FttTransactionView
+
+@{
+    ViewData["Title"] = "Change";
+
+    ViewBag.Active="ftt";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">FTT</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item active">FTT</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Demo purpose only -->
+                    <div style="min-height: 300px;">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>FTT Form</h4>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <hr/>
+                            </div>
+                        </div>
+                        <form asp-action="Change" class="row">
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Comment" type="text" id="form1Example1" class="form-control" />
+                                    <label class="form-label" for="form1Example1">Comment</label>
+                                </div>
+                                <span asp-validation-for="Comment" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="BankLetterId" type="text" id="form1Example2" class="form-control" />
+                                    <label class="form-label" for="form1Example2">Bank Letter ID</label>
+                                </div>
+                                <span asp-validation-for="BankLetterId" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline datepicker" data-mdb-format="mmm, dd, yyyy">
+                                    <input asp-for="TTDate" type="text" class="form-control" id="exampleDatepicker1">
+                                    <label for="exampleDatepicker1" class="form-label">TT Date</label>
+                                </div>
+                                <span asp-validation-for="TTDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="TTNumber" type="text" id="form1Example3" class="form-control" />
+                                    <label class="form-label" for="form1Example3">TT Number</label>
+                                </div>
+                                <span asp-validation-for="TTNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="TTAmount" type="text" id="form1Example4" class="form-control" />
+                                    <label class="form-label" for="form1Example4">TT Amount</label>
+                                </div>
+                                <span asp-validation-for="TTAmount" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="SenderName" type="text" id="form1Example5" class="form-control" />
+                                    <label class="form-label" for="form1Example5">Sender Name</label>
+                                </div>
+                                <span asp-validation-for="SenderName" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="BenBank" type="text" id="form1Example6" class="form-control" />
+                                    <label class="form-label" for="form1Example6">Beneficiary Bank</label>
+                                </div>
+                                <span asp-validation-for="BenBank" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="PurposeTransaction" type="text" id="form1Example7" class="form-control" />
+                                    <label class="form-label" for="form1Example7">Purpose Transaction</label>
+                                </div>
+                                <span asp-validation-for="PurposeTransaction" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="BenCountry" type="text" id="form1Example8" class="form-control" />
+                                    <label class="form-label" for="form1Example8">Beneficiary Country</label>
+                                </div>
+                                <span asp-validation-for="BenCountry" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="BenCompany" type="text" id="form1Example9" class="form-control" />
+                                    <label class="form-label" for="form1Example9">Beneficiary Company</label>
+                                </div>
+                                <span asp-validation-for="BenCompany" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <select class="select" asp-for="CurrencyId" asp-items="ViewBag.CurrencyId">
+                                   
+                                </select>
+                                <label class="form-label select-label">Currency</label>
+                                <span asp-validation-for="CurrencyId" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-outline mb-4">
+                                    <input asp-for="InvoiceContractNo" type="text" id="form1Example10" class="form-control" />
+                                    <label class="form-label" for="form1Example10">Invoice Contract Number</label>
+                                </div>
+                                <span asp-validation-for="InvoiceContractNo" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <input type="submit" value="Save" class="btn btn-primary w-lg" />
+                                <a asp-action="Index" class="btn btn-secondary text-bg-secondary w-lg">Back to List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->
+
+@section css{
+    <link href="~/mdb/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/datepicker.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/select.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/mdb/js/mdb.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/datepicker.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/select.min.js"></script>
+}
+
+
+@*<div class="card hoverable p-3 ml-5 mt-5 row" style="text-align: left;">
+    <div class="card-header card-panel white-text col s12" style="background-color:#2196F3">
+        <h4>FTT Form</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Change" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TID" />
+            <div class="form-group col s6">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="BankLetterId" class="control-label"></label>
+                <input asp-for="BankLetterId" class="form-control" />
+                <span asp-validation-for="BankLetterId" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="TTDate" class="control-label"></label>
+                <input asp-for="TTDate" class="form-control" />
+                <span asp-validation-for="TTDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="TTNumber" class="control-label"></label>
+                <input asp-for="TTNumber" class="form-control" />
+                <span asp-validation-for="TTNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="TTAmount" class="control-label"></label>
+                <input asp-for="TTAmount" class="form-control" />
+                <span asp-validation-for="TTAmount" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+            <label asp-for="Created" class="control-label"></label>
+            <input asp-for="Created" class="form-control" />
+            <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Updated" class="control-label"></label>
+            <input asp-for="Updated" class="form-control" />
+            <span asp-validation-for="Updated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="CreatedBy" class="control-label"></label>
+            <input asp-for="CreatedBy" class="form-control" />
+            <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="UpdatedBy" class="control-label"></label>
+            <input asp-for="UpdatedBy" class="form-control" />
+            <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="SenderName" class="control-label"></label>
+                <input asp-for="SenderName" class="form-control" />
+                <span asp-validation-for="SenderName" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="BenBank" class="control-label"></label>
+                <input asp-for="BenBank" class="form-control" />
+                <span asp-validation-for="BenBank" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="PurposeTransaction" class="control-label"></label>
+                <input asp-for="PurposeTransaction" class="form-control" />
+                <span asp-validation-for="PurposeTransaction" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="BenCountry" class="control-label"></label>
+                <input asp-for="BenCountry" class="form-control" />
+                <span asp-validation-for="BenCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="BenCompany" class="control-label"></label>
+                <input asp-for="BenCompany" class="form-control" />
+                <span asp-validation-for="BenCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="CurrencyId" class="control-label"></label>
+                <select asp-for="CurrencyId" class="form-control" asp-items="ViewBag.CurrencyId"></select>
+                <span asp-validation-for="CurrencyId" class="text-danger"></span>
+            </div>
+            @*   <div class="form-group">
+            <label asp-for="StatusId" class="control-label"></label>
+            <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+            <span asp-validation-for="StatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="UserId" class="control-label"></label>
+            <input asp-for="UserId" class="form-control" />
+            <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="DepartmentId" class="control-label"></label>
+            <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group col s6">
+                <label asp-for="InvoiceContractNo" class="control-label"></label>
+                <input asp-for="InvoiceContractNo" class="form-control" />
+                <span asp-validation-for="InvoiceContractNo" class="text-danger"></span>
+            </div>
+            <div class="form-group col s12">
+                <input type="submit" value="Save" class="btn blue" />
+                <a asp-action="Index" class="btn grey">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>*@
+
+
+
+
+
+
+@*@section css{
+    <link href="~/Content/plugins/selectize/selectize.min.css" rel="stylesheet" />
+}
+    @section Scripts{
+     <script src="~/Content/plugins/selectize/selectize.min.js"></script>*@
+
+@*    <script>
+
+        $( 'select' ).addClass( 'browser-default' );
+        var select = $( 'select' ).selectize( {
+            create: false,
+            sortField: "text",
+        } )
+
+
+        $( document ).ready( function () {
+            
+        } );
+    </script>
+}
+*@
+
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+

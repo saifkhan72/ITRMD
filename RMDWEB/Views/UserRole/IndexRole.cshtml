@@ -1,0 +1,47 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+
+@{
+    ViewData["Title"]="Role Manager";
+    ViewBag.Active="dab_roles";
+}
+<h1>Role Manager</h1>
+<form method="post" asp-action="AddRole" asp-controller="UserRole">
+    <div class="input-group">
+        <input name="roleName" class="form-control w-25">
+        <span class="input-group-btn">
+            <button class="btn btn-info">Add New Role</button>
+        </span>
+    </div>
+</form>
+<table id="example" class="display table nowrap compact " style="width:100%">
+    <thead>
+        <tr>
+            <th>Role</th>
+            <th>Title</th>
+            <th>change</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var role in Model.OrderBy(a => a.Name))
+        {
+            <tr>
+                <td>@role.Name</td>
+                <td>@role.Id</td>
+                <td><i class="material-icons">info</i></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section css{
+    @Html.Partial("_Datatable", new ViewDataDictionary(ViewData) { { "type", "css" }, { "buttons", "true" }})
+
+}
+
+    @section js{
+    @Html.Partial("_Datatable", new ViewDataDictionary(ViewData) {{ "type", "js" }, { "buttons", "true" }})
+
+}
+
+

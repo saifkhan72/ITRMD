@@ -1,0 +1,42 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">Home Page</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Demo purpose only -->
+                    <div style="min-height: 300px;">
+                        <div class="text-center">
+                            <header class="mt-5 text-uppercase">
+                                <h1 class="text-danger">@ViewData["Title"]</h1>
+                                <p class="text-danger">You do not have access to this resource.</p>
+                            </header>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->

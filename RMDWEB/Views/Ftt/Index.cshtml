@@ -1,0 +1,346 @@
+﻿@model IEnumerable<RMDWEB.Models.FTTTransaction>
+@{
+
+    ViewBag.Title="FTT";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">FTT</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item active">FTT</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            @if(User.IsInRole("ftt-payment"))
+                            {
+                                <a href="@Url.Action("Change","Ftt",new { id = 0 })" class="btn btn-primary mb-3" style="width:155px; letter-spacing:1px;"><i class="mdi mdi-plus"></i>New FTT</a>
+                            }
+                        </div>
+                    </div>
+                    <table id="datatable" class="table table-sm table-bordered dt-responsive nowrap"
+                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    TID
+                                </th>
+                                <th>I/C #</th>
+                                <th>
+                                    Bank Letter
+                                </th>
+
+                                <th>
+                                    TTDate
+                                </th>
+                                <th>
+                                    TTNumber
+                                </th>
+                                <th>
+                                    TTAmount
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+
+                                <th>
+                                    Currency
+                                </th>
+
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                int x = 0;
+                                foreach (var item in Model.OrderByDescending(a => a.TID))
+                                {
+                                    x++;
+                                    <tr>
+                                        <td>
+                                            @x
+                                        </td>
+                                        <td>
+                                            @item.InvoiceContractNo
+                                        </td>
+                                        <td>
+                                            @item.BankLetterId
+                                        </td>
+
+                                        <td>
+                                            @item.TTDate.ToShortDateString()
+                                        </td>
+                                        <td>
+                                            @item.TTNumber
+                                        </td>
+                                        <td>
+                                            @string.Format("{0:0,0.00,00}", item.TTAmount)
+                                        </td>
+
+                                        <td>
+
+                                            @item.StatusTbl.Name
+                                        </td>
+
+                                        <td>
+                                            @item.CurrencyTbl.CurName
+                                        </td>
+                                        <td>
+                                            @if (item.StatusTbl.Name == "Created")
+                                            {
+
+                                                <span>
+                                                    @if (User.IsInRole("ftt-payment"))
+                                                    {
+                                                        <a href=" @Url.Action("Change", "Ftt", new { id = item.TID })">
+                                                            <i class="mdi mdi-pencil mdi-24px"></i>
+                                                        </a>
+                                                    }
+                                                </span>
+                                            }
+
+                                            <a href=" @Url.Action("Details", "Ftt", new { id = item.TID })">
+                                                <i class="mdi mdi-information mdi-24px"></i>
+
+                                            </a>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->
+
+@section css{
+    <!-- DataTables -->
+    <link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+      type="text/css" />
+}
+
+@section Scripts{
+    <!-- Required datatable js -->
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="~/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/jszip/jszip.min.js"></script>
+    <script src="~/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="~/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="~/assets/js/pages/datatables.init.js"></script>
+}
+
+
+@*<style>
+    .nav{
+        padding-right: 100px !importan;
+       padding-left: 100px !importan;
+
+    }
+</style>
+
+<div class="card hoverable ml-5 mt-5 p-3" >
+    <div class="card-header">
+
+        <nav class="nav pl-5 breadcrumb-nav grey lighten-4 z-depth-0 border-bottom" style="z-index:1">
+            <div class="nav-wrapper">
+                <div class="col s12 mr-4">
+                    <a href="@Url.Action("Index","Home")" class="breadcrumb black-text">Home</a>
+                    <a href="javascript:void(0)" style="cursor:text" class="breadcrumb disabled">FTT</a>
+
+                    @if(User.IsInRole("ftt-payment"))
+                    {
+                        <a href="@Url.Action("Change","Ftt",new { id = 0 })" style="cursor:text" class="btn btn-primary">
+                            Add New Ftt
+                        </a>
+
+
+                    }
+
+                </div>
+            </div>
+        </nav>
+
+        <span>
+
+        </span>
+    </div>
+    <div class="card-body">
+
+        <h4 class="bg-danger">@ViewBag.MSG</h4>
+        <table class="table border compact striped" style="display: none;">
+            <thead>
+                <tr>
+                    <th>
+                        TID
+                    </th>
+                    <th>I/C #</th>
+                    <th>
+                        Bank Letter
+                    </th>
+
+                    <th>
+                        TTDate
+                    </th>
+                    <th>
+                        TTNumber
+                    </th>
+                    <th>
+                        TTAmount
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+
+                    <th>
+                        Currency
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if(Model.Count()!=0)
+                {
+                    int x = 0;
+                    foreach(var item in Model.OrderByDescending(a => a.TID))
+                    {
+                        x++;
+                        <tr>
+                            <td>
+                                @x
+                            </td>
+                            <td>
+                                @item.InvoiceContractNo
+                            </td>
+                            <td>
+                                @item.BankLetterId
+                            </td>
+
+                            <td>
+                                @item.TTDate.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.TTNumber
+                            </td>
+                            <td>
+                                @string.Format("{0:0,0.00,00}", item.TTAmount)
+                            </td>
+
+                            <td>
+
+                                @item.StatusTbl.Name
+                            </td>
+
+                            <td>
+                                @item.CurrencyTbl.CurName
+                            </td>
+                            <td>
+                                @if(item.StatusTbl.Name=="Created")
+                                {
+
+                                    <span>
+                                        @if(User.IsInRole("ftt-payment"))
+                                        {
+                                            <a href=" @Url.Action("Change", "Ftt", new { id = item.TID })">
+                                                <i class="material-icons">edit</i>
+                                            </a>
+                                        }
+                                    </span>
+                                }
+
+                                <a href=" @Url.Action("Details", "Ftt", new { id = item.TID })">
+                                    <i class="material-icons">info</i>
+
+                                </a>
+
+
+
+
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        Page @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+        <div class="text-center">
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <li class="page-item @(Model.IsFirstPage ? "disabled" : "")">
+        <a class="page-link" href="@(Model.IsFirstPage ? "#" : Url.Action("Index", new { page = Model.PageNumber - 1 }))" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+        </a>
+        </li>
+        @for(int i = 1; i<=Model.PageCount; i++)
+        {
+        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+        </li>
+        }
+        <li class="page-item @(Model.IsLastPage ? "disabled" : "")">
+        <a class="page-link" href="@(Model.IsLastPage ? "#" : Url.Action("Index", new { page = Model.PageNumber + 1 }))" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+        </a>
+        </li>
+        </ul>
+        </nav>
+        </div>
+        
+    </div>
+</div>*@
+
+
+@*@section css{
+    @Html.Partial("_Datatable", new ViewDataDictionary(ViewData) { { "type", "css" }, { "buttons", "false" }})
+
+}
+
+    @section Scripts{
+    @Html.Partial("_Datatable", new ViewDataDictionary(ViewData) {{ "type", "js" }, { "buttons", "false" }})
+
+}*@
+

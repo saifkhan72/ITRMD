@@ -1,0 +1,80 @@
+﻿<style>
+    .parent {
+        color: #2196f3 !important;
+    }
+</style>
+
+
+<ul class="aem-sidebar-items" id="general">
+
+
+    @if(User.IsInRole("sys-admin"))
+    {
+        <li class="mt-2 ml-3 text-right">
+            <a href="#" onclick="aem.toggleElemnt(event,'#configurations')" class="parent">
+                <i class="material-icons left">keyboard_arrow_left</i>
+                System settings
+            </a>
+            <ul class="aem-sidebar-items" id="configurations" style="display:none;">
+
+
+                <li class="mt-2 @(ViewBag.Active == "users" ? "active" : "")">
+                    <a href="@Url.Action("Index", "UserRole")">
+                        <i class="material-icons left">remove</i>
+                        Users
+                    </a>
+                </li>
+
+                <li class="mt-2 @(ViewBag.Active == "Banks" ? "active" : "")">
+                    <a href="@Url.Action("Banks", "UserRole")">
+                        <i class="material-icons left">remove</i>
+                        Banks
+                    </a>
+                </li>
+
+                <li class="mt-2 @(ViewBag.Active == "Departments" ? "active" : "")">
+                    <a href="@Url.Action("Departments", "UserRole")">
+                        <i class="material-icons left">remove</i>
+                        Departments
+                    </a>
+                </li>
+
+                  <li class="mt-2 @(ViewBag.Active == "ActivityLog" ? "active" : "")">
+                    <a href="@Url.Action("Index", "ActivityLog")">
+                        <i class="material-icons left">remove</i>
+                       Activity Log
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+    }
+    
+    @if(User.Identity.IsAuthenticated){
+    <li class="mt-2 ml-3">
+        <a href="#" onclick="aem.toggleElemnt(event,'#ftts')" class="parent">
+            <i class="material-icons left">keyboard_arrow_left</i>
+            FTT
+        </a>
+        <ul class="aem-sidebar-items" id="ftts" style="display:none;">
+            <li class="mt-2 @(ViewBag.Active == "ftt" ? "active" : "")">
+                <a href="@Url.Action("Index", "Ftt")">
+                    <i class="material-icons left">remove</i>
+
+                        Suspended Transactions
+                </a>
+            </li>
+
+                <li class="mt-2 @(ViewBag.Active == "ftta" ? "active" : "")">
+                    <a href="@Url.Action("IndexArchive", "Ftt")">
+                        <i class="material-icons left">remove</i>
+                        Archive Transactions
+                    </a>
+                </li>
+
+        </ul>
+    </li>
+    }
+
+</ul>

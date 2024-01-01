@@ -1,0 +1,134 @@
+﻿@model RMDWEB.Models.BankTbl
+
+@{
+    ViewData["Title"] = "EditBank";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">@(Model.BankId != 0 ? "Update" : "Add") Bank</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item active">@(Model.BankId != 0 ? "Update" : "Add") Bank</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>@(Model.BankId !=0 ? "Update" : "Add") Bank</h4>
+                        </div>
+                        <div class="col-12">
+                            <hr/>
+                        </div>        
+                    </div>
+                    <form asp-action="Edit" class="row">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="BankId" />
+                        <div class="col-6">
+                            <div class="form-outline mb-4">
+                            <input asp-for="Name" type="text" id="form1Example1" class="form-control" required/>
+                            <label class="form-label" for="form1Example1">Name</label>
+                            </div>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <select class="select" data-mdb-filter="true" asp-for="StatusId" asp-items="ViewBag.StatusId">
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" value="Save" class="btn btn-primary w-lg" />
+                            <a class="btn text-bg-secondary w-lg" asp-action = "Index" >Back to List</a>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->
+@section css{
+    <link href="~/mdb/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/datepicker.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/select.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/mdb/js/mdb.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/datepicker.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/select.min.js"></script>
+}
+
+@*<div class="card p-4 mt-5 hoverable ml-5 row" style="text-align: left;">
+    <div class="card-header card-panel white-text row col s12 mb-3" style="background-color:#2196F3">
+        <div class="col s12">
+            <h5>
+                Bank Form
+            </h5>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="col-md-4">
+        <form asp-action="EditBank" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BankId" />
+            <div class="form-group col s6">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+                <div class="form-group mt-3 mb-5 col s6">
+                <label asp-for="StatusId" class="control-label"></label>
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                <span asp-validation-for="StatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group col s12">
+                <input type="submit" value="Save" class="btn blue" />
+                    <a class="btn grey darken-2" asp-action="Banks">Back to List</a>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>*@
+
+
+
+@*<div class="row container">
+    <h3>Bank form</h3>
+    <hr/>
+    <div class="col-md-4">
+        <form asp-action="EditBank">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BankId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusId" class="control-label"></label>
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                <span asp-validation-for="StatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" asp-action="Banks">Back to List</a>
+    </div>
+</div>*@
+

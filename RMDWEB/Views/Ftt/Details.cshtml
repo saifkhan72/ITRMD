@@ -1,0 +1,603 @@
+﻿@model RMDWEB.Models.FttDetails
+
+@{
+    ViewData["Title"] = "Details";
+    ViewBag.Active = "Ftt";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">FTT Details</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="UserRole">FTT</a></li>
+                    <li class="breadcrumb-item active">FTT Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Demo purpose only -->
+                    <div @*style="min-height: 300px;"*@>
+                        <!-- Tabs navs -->
+                        <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active"
+                                   id="ex3-tab-1"
+                                   data-mdb-toggle="tab"
+                                   href="#ex3-tabs-1"
+                                   role="tab"
+                                   aria-controls="ex3-tabs-1"
+                                   aria-selected="true">Transaction</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link"
+                                   id="ex3-tab-2"
+                                   data-mdb-toggle="tab"
+                                   href="#ex3-tabs-2"
+                                   role="tab"
+                                   aria-controls="ex3-tabs-2"
+                                   aria-selected="false">Information</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link"
+                                   id="ex3-tab-3"
+                                   data-mdb-toggle="tab"
+                                   href="#ex3-tabs-3"
+                                   role="tab"
+                                   aria-controls="ex3-tabs-3"
+                                   aria-selected="false">Document</a>
+                            </li>
+                        </ul>
+                        <!-- Tabs navs -->
+                        <!-- Tabs content -->
+                        <div class="tab-content" id="ex2-content">
+                            <div class="tab-pane fade show active"
+                                 id="ex3-tabs-1"
+                                 role="tabpanel"
+                                 aria-labelledby="ex3-tab-1">
+                                <table class="table table-sm" >
+                                    <tr>
+                                        <td>
+                                            TID
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.TID
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            BankLetterId
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.BankLetterId
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            TTDate
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.TTDate.ToShortDateString()
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            TTNumber
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.TTNumber
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            TTAmount
+                                        </td>
+                                        <td>
+                                            @string.Format("{0:0,0.00,00}", Model.FTTTransaction.TTAmount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Bank
+                                        </td>
+                                        <td>
+                                            @if (Model.FTTTransaction.DepartmentId != null)
+                                            {
+                                                <span class="text-info"> @Model.FTTTransaction.DepartmentId</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger">no bank account for user</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Status
+                                        </td>
+                                        <td>
+                                            @if (Model.FTTTransaction.TID != 0)
+                                            {
+                                                <span>@Model.FTTTransaction.StatusTbl.Name</span>
+
+                                                if (Model.FTTTransaction.StatusTbl.Name == "Canceled")
+                                                {
+                                                    <span class="small text-red">@Model.FTTTransaction.Updated.Value.ToShortDateString()</span>
+                                                }
+                                            }
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            SenderName
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.SenderName
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            BenBank
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.BenBank
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            BenCountry
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.BenCountry
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            PurposeTransaction
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.PurposeTransaction
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Currency
+                                        </td>
+                                        <td>
+                                            @Model.FTTTransaction.CurrencyTbl.CurName
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            Update
+                                        </td>
+                                        <td>
+
+                                            @if (Model.FTTTransaction.StatusTbl.Name != "Accepted" && Model.FTTTransaction.StatusTbl.Name != "Rejected")
+                                            {
+
+
+                                                if (User.IsInRole("ftt-payment"))
+                                                {
+                                                    if (Model.FTTTransaction.StatusTbl.Name == "Created")
+                                                    {
+                                                        <span>
+                                                            <a class="btn btn-danger" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=0 })">
+                                                                <i class="fa fa-close left"></i>Cancel
+                                                            </a>
+                                                        </span>
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        <a class="left btn btn-danger small sm bg-danger" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=1 })">
+                                                            Reject <i class="fa fa-close"></i>
+                                                        </a>
+                                                    </span>
+                                                }
+
+
+                                                if (User.IsInRole("ftt-compliance"))
+                                                {
+                                                    if (Model.FTTTransaction.StatusTbl.Name == "Created")
+                                                    {
+                                                        <span>
+                                                            <a class="right btn btn-primary" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=2 })">
+                                                                <i class="fa fa-check"></i>Authorize
+                                                            </a>
+                                                        </span>
+                                                    }
+
+                                                }
+                                                else if (User.IsInRole("ftt-senior-managment"))
+                                                {
+                                                    if (Model.FTTTransaction.StatusTbl.Name == "Authorized")
+                                                    {
+                                                        <span>
+                                                            <a class="right btn btn-primary" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=3 })">
+                                                                <i class="fa fa-check"></i>Approve
+                                                            </a>
+                                                        </span>
+                                                    }
+                                                }
+
+                                                else if (User.IsInRole("ftt-dab-officer"))
+                                                {
+                                                    if (Model.FTTTransaction.StatusTbl.Name == "Approved")
+                                                    {
+                                                        <span>
+                                                            <a class="right btn btn-primary" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=4 })">
+                                                                Check<i class="fa fa-check"></i>
+                                                            </a>
+                                                        </span>
+                                                    }
+                                                }
+
+                                                else if (User.IsInRole("ftt-dab-manager"))
+                                                {
+                                                    if (Model.FTTTransaction.StatusTbl.Name == "Checked")
+                                                    {
+                                                        <span>
+                                                            <a class="right btn btn-primary" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=5 })">
+                                                                <i class="fa fa-check"></i>Proccess
+                                                            </a>
+                                                        </span>
+                                                    }
+                                                }
+                                                else if (User.IsInRole("ftt-dab-dg-dy"))
+                                                {
+                                                    if (Model.FTTTransaction.StatusTbl.Name == "Processed")
+                                                    {
+                                                        <span>
+                                                            <a class="right btn btn-primary" href="@Url.Action("ChangeFttTransaction","Ftt",new{TID = Model.FTTTransaction.TID,StatusId=6 })">
+                                                                <i class="fa fa-check"></i>Accept
+                                                            </a>
+                                                        </span>
+                                                    }
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="tab-pane fade"
+                                 id="ex3-tabs-2"
+                                 role="tabpanel"
+                                 aria-labelledby="ex3-tab-2">
+                                <!-- Modal Trigger -->
+                                <a class="waves-effect waves-light btn btn-primary w-lg modal-trigger mb-3" data-mdb-toggle="modal" data-mdb-target="#modal1">Add Comment</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form id="form1">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Comment regarding this FTT</h5>
+                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" id="TID" name="TID" value="@Model.FTTTransaction.TID" />
+                                                    <div class="form-outline mb-4">
+                                                        <textarea class="form-control" id="Comment" name="Comment" rows="4"></textarea>
+                                                        <label class="form-label" for="Comment">Comment Details</label>
+                                                    </div>
+                                                    @Html.DropDownList("StatusId", null, htmlAttributes: new { @class = "select" })
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary text-bg-secondary" data-mdb-dismiss="modal">Close</button>
+                                                    <button  class="btn btn-primary" type="submit" onclick="fttCommentSubmit(event)">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <table class="table table-sm" id="commentTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Comment</th>
+                                            <th>By</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4">loading....</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade"
+                                 id="ex3-tabs-3"
+                                 role="tabpanel"
+                                 aria-labelledby="ex3-tab-3">
+                                <a class="waves-effect waves-light btn btn-primary w-lg modal-trigger mb-3" data-mdb-toggle="modal" data-mdb-target="#modal2">Add File</a>
+                                <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form id="form2">
+                                            <input type="hidden" id="TID" name="TID" value="@Model.FTTTransaction.TID" />
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add file regarding this FTT</h5>
+                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <select class="select" id="Title" name="Title">
+                                                        <option value="">Select a document</option>
+                                                        <option value="Bank Request Letter">Bank Request Letter</option>
+                                                        <option value="Fund Telegraphic Transfer Application form">Fund Telegraphic Transfer Application form</option>
+                                                        <option value="Invoice">Invoice</option>
+                                                        <option value="Contract/Agreement">Contract/Agreement</option>
+                                                        <option value="Business License">Business License</option>
+                                                        <option value="TIN">TIN</option>
+                                                        <option value="ACCD">ACCD</option>
+                                                        <option value="Valid Passport/NID">Valid Passport/NID</option>
+                                                        <option value="Tax Clearance">Tax Clearance</option>
+                                                        <option value="Sanction Screening Result">Sanction Screening Result</option>
+                                                        <option value="Article of Association (AOA)">Article of Association (AOA)</option>
+                                                        <option value="KYC Form">KYC Form</option>
+                                                    </select>
+                                                    <label class="form-label select-label mb-3">File Detail</label>
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="form-label" for="file-input">Upload File</label>
+                                                        <input asp-for="FTTDocumentfile" id="file-input" name="file-input" type="file" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary text-bg-secondary" data-mdb-dismiss="modal">Close</button>
+                                                    <button class="btn btn-primary" type="button" onclick="uploadFile()">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <table class="table-sm table" id="documentTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Status</th>
+                                            <th>Title</th>
+                                            <th>Download</th>
+                                            <th>Delete</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4">loading....</td>
+                                        </tr>
+                                    </tbody>
+                                    <thead>
+                                        <tr>
+                                            
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Tabs content -->
+                        <a asp-action="Index" class="btn btn-secondary w-lg text-bg-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->
+
+
+
+<script>
+
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+
+
+    const fetchComments = function () {
+        let transid = @Model.FTTTransaction.TID
+
+            $('#commentTable tbody').html(`<tr><td colspan="4">Loading...</td></tr>`)
+
+        let html = ''
+        $.ajax('/Ftt/allComment/' + transid).then(res => {
+            res.map(item => {
+                html += `<tr>`
+                html += `<td>${item?.comment}</td>`
+                html += `<td>${item?.userId}</td>`
+                html += `<td > ${item?.created}</td>`
+                html += `<td > ${item?.statusId}</td>`
+                html += `</tr>`
+            })
+            $('#commentTable tbody').html(html)
+        })
+    }
+
+
+    const getDocuments = function () {
+        let transid = @Model.FTTTransaction.TID
+
+            $('#documentTable tbody').html(`
+                                                                          <tr>
+                                                                               <td colspan="5">Loading...</td>
+                                                                          </tr>
+                                                                      `)
+        let html = ''
+        $.ajax('/Ftt/allDocuments/' + transid).then(res => {
+            res.map(item => {
+
+                html += `<tr>`
+                html += `<td>${item?.id}</td>`
+                html += `<td>${item?.statusId}</td>`
+                html += `<td>${item?.title}</td>`
+                html += `<td><a class="btn btn-primary btn-floating" href="/Ftt/DownloadFttFile?file=${item?.path}&id=${item?.id}"><i class="mdi mdi-download mdi-24px"></i></td>`
+                html += `<td><button class="btn btn-danger btn-floating" onclick="deleteFttDocument(${item?.id},1)"><i class="mdi mdi-delete-outline mdi-24px"></i></i></button></td>`
+                html += `<td><button class="btn btn-warning btn-floating" onclick="deleteFttDocument(${item?.id},2)"><i class="mdi mdi-progress-check mdi-24px" onlcick=""></i></button></td>`
+                html += `</tr>`
+
+            })
+            $('#documentTable tbody').html(html)
+        })
+    }
+
+    function fttCommentSubmit(e) {
+
+        e.preventDefault()
+        let btn = $(e.target).find('button')
+        let html_btm = btn.html()
+        btn.attr('disabled', 'disabled').html('Loading')
+
+        let jsonObject = {
+            "fttcommentid": 0,
+            "Comment": document.getElementById("Comment").value,
+            "TID": document.getElementById("TID").value,
+            "StatusId": document.getElementById("StatusId").value
+        }
+
+        $.ajax({
+            url: "@Url.Action("postComment","Ftt")",
+            type: "POST",
+            data: JSON.stringify(jsonObject),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (response) {
+                btn.html(html_btm).removeAttr('disabled')
+                return false;
+            },
+            success: function (response) {
+                fetchComments();
+
+                // Upload successful, close the modal
+                var modal = document.getElementById("modal1");
+                var modalInstance = mdb.Modal.getInstance(modal);
+                modalInstance.hide();
+
+                // Reset the form (replace "formId" with the actual ID or selector of the form element)
+                document.getElementById("form1").reset();
+                return true;
+            }
+        });
+    }
+
+    function uploadFile() {
+        var fileInput = document.getElementById("file-input");
+        var tid = document.getElementById("TID").value;
+        var title = document.getElementById("Title").value;
+
+        var file = fileInput.files[0];
+
+        var formData = new FormData();
+        formData.append("file", file);
+        formData.append("tid", tid);
+        formData.append("title", title);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/api/SysConfiguration/uploadfile", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+
+                // Hide the modal
+                $("#modal2").modal("hide");
+
+                // Reset the form
+                document.getElementById("form2").reset();
+                getDocuments()
+                return true;
+
+            }
+        };
+        xhr.send(formData);
+    }
+
+
+
+
+    const deleteFttDocument = function (id, Status) {
+
+        let title = '';
+        if (Status == 1) {
+            title = 'are sure to delete!';
+        } else {
+            title = 'you are activing the document, once active not deletable!'
+        }
+        swal({
+            title: title,
+            icon: 'info',
+            buttons: true
+        }).then(res => {
+            if (res) {
+
+                $.ajax({
+                    url: '/Ftt/ChangeFttFile?id=' + id + '&Status=' + Status,
+                    type: 'GET',
+                    success: function (result) {
+                        // Do something with the result
+                        getDocuments();
+
+                    }
+
+                });
+
+            }
+        })
+    }
+
+
+    $(document).ready(function () {
+        fetchComments();
+        getDocuments();
+    })
+</script>
+
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+
+
+
+@section css{
+    <link href="~/mdb/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/select.min.css" rel="stylesheet" />
+
+}
+
+@section Scripts{
+    <script src="~/mdb/js/mdb.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/select.min.js"></script>
+    <script src="~/content/sweetalert.min.js"></script>
+
+}
+    
+
+
+
+
+
+

@@ -1,0 +1,427 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"]="Register User";
+    ViewBag.Active="users";
+
+
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">Register User</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="UserRole">Users</a></li>
+                    <li class="breadcrumb-item active">Register User</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<!-- Start page content-->
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Demo purpose only -->
+                    <div style="min-height: 300px;">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3>Register User</h3>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <hr />
+                            </div>
+                            <form class="row" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.Email" type="email" id="form1Example1" class="form-control" />
+                                        <label class="form-label" for="form1Example1">Email address</label>                                        
+                                    </div>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.FirstName" type="text" id="form1Example2" class="form-control" />
+                                        <label class="form-label" for="form1Example2">First Name</label>
+                                    </div>
+                                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.LastName" type="text" id="form1Example3" class="form-control" />
+                                        <label class="form-label" for="form1Example3">Last Name</label>
+                                    </div>
+                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.FatherName" type="text" id="form1Example4" class="form-control" />
+                                        <label class="form-label" for="form1Example4">Father Name</label>
+                                        <span asp-validation-for="Input.FatherName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.UserId" type="text" id="form1Example5" class="form-control" />
+                                        <label class="form-label" for="form1Example5">User ID</label>
+                                    </div>
+                                    <span asp-validation-for="Input.UserId" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline datepicker" data-mdb-format="dd, mmm, yyyy">
+                                        <input asp-for="Input.RegisterDate" type="text" class="form-control" id="exampleDatepicker1">
+                                        <label for="exampleDatepicker1" class="form-label">Register Date</label>
+                                    </div>
+                                    <span asp-validation-for="Input.RegisterDate" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline datepicker" data-mdb-format="dd, mmm, yyyy">
+                                        <input asp-for="Input.ExpiryDate" type="text" class="form-control" id="exampleDatepicker2">
+                                        <label for="exampleDatepicker2" class="form-label">Expiry Date</label>
+                                    </div>
+                                    <span asp-validation-for="Input.ExpiryDate" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.IpAddress" type="text" id="form1Example6" class="form-control" />
+                                        <label class="form-label" for="form1Example6">IP Address</label>
+                                    </div>
+                                    <span asp-validation-for="Input.IpAddress" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.Designation" type="text" id="form1Example7" class="form-control" />
+                                        <label class="form-label" for="form1Example7">
+                                            Designation
+                                        </label>
+                                    </div>
+                                    <span asp-validation-for="Input.Designation" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.PhoneNumber" type="text" id="form1Example8" class="form-control" />
+                                        <label class="form-label" for="form1Example8">Phone Number</label>
+                                    </div>
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <select class="select" asp-for="Input.Dab">
+                                        <option value="0">DAB</option>
+                                        <option value="1">Public</option>
+                                    </select>
+                                    <label class="form-label select-label">Select Bank</label>
+                                    <span asp-validation-for="Input.Dab" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <select class="select" data-mdb-filter="true" id="BankId" name="BankId"
+                                            onchange='getSelectItems( "#DepartmentId", "/api/SysConfiguration/getDepartments",0, this.value );'>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="select" data-mdb-filter="true" id="DepartmentId" asp-for="Input.DepartmentId">
+                                        <option disabled>Select Department</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="select" data-mdb-filter="true" id="StatusId" asp-for="Input.StatusId">
+                                        <option value="0" >Select Status</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.Password" type="password" id="form1Example9" class="form-control" />
+                                        <label class="form-label" for="form1Example9">Password</label>
+                                    </div>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-outline mb-4">
+                                        <input asp-for="Input.ConfirmPassword" type="password" id="form1Example10" class="form-control" />
+                                        <label class="form-label" for="form1Example10">Confirm Password</label>
+                                    </div>
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <button id="registerSubmit" type="submit" class="btn btn-primary w-100">Register</button>
+                                </div>
+                                <div class="col-4">
+                                    <a asp-action="Index" asp-controller="UserRole" class="btn btn-secondary w-100 text-bg-secondary" >Users List</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->
+
+@section css{
+    <link href="~/mdb/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/datepicker.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/select.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/mdb/js/mdb.min.js"></script>   
+    <script src="~/mdbootstrap/js/modules/datepicker.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/select.min.js"></script>
+}
+
+<script>
+    $(document).ready(function () {
+        getBanks(); // Call the function to load dynamic data
+        $('.select').selectpicker('refresh');
+    });
+
+    function getBanks() {
+        // Make an AJAX request to fetch the bank data
+        $.ajax({
+            url: "/api/SysConfiguration/getBanks",
+            method: "GET",
+            success: function (response) {
+                var selectElement = $("#BankId");
+                selectElement.empty(); // Clear any existing options
+
+                // Iterate over the response data and create options
+                for (var i = 0; i < response.length; i++) {
+                    var bank = response[i];
+                    var option = $("<option>")
+                        .val(bank.id)
+                        .text(bank.name);
+                    selectElement.append(option);
+                }
+
+                selectElement.selectpicker('refresh'); // Refresh the selectpicker
+            },
+            error: function (error) {
+                console.error("Failed to load banks:", error);
+            }
+        });
+
+        $(document).ready(function () {
+        $('.select').selectpicker('refresh');
+        });
+    }
+
+    const getSelectItems = function (element, apiUrl, id, pid) {
+        $(element).html(`<option value="0">loading</option>`);
+        let htmlRelation = '';
+        $.ajax({
+            url: apiUrl,
+            data: {
+                id: id,
+                pid: pid
+            }
+        }).done(res => {
+            htmlRelation += `<option value="0">Select Status</option>`;
+            res.forEach(item => {
+                if (item.id == id) {
+                    htmlRelation += `<option value='${item.id}' selected='selected'>${item.name}</option>`;
+                } else {
+                    htmlRelation += `<option value='${item.id}'>${item.name}</option>`;
+                }
+            });
+            $(element).html(htmlRelation);
+            updateSelect(element);
+        });
+    };
+
+    $( document ).ready( function () {
+            //getSelectItems( "#BankId", "/api/SysConfiguration/getBanks", 0, 0 );
+            getSelectItems( "#StatusId", "/api/SysConfiguration/getStatuss", 0, 0 );
+        } );
+
+</script>
+
+
+
+
+@*<div class="card-body row">
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="col s12">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">email</i>
+                <input asp-for="Input.Email" id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Email</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input asp-for="Input.FirstName" id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">FirstName</label>
+            </div>
+        </div>
+        <div class="col s6">
+            <input asp-for="Input.Email" class="form-control" autocomplete="Email" aria-required="true" />
+            <label asp-for="Input.Email"></label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <input asp-for="Input.FirstName" class="form-control" autocomplete="FirstName" aria-required="true" />
+            <label asp-for="Input.FirstName"></label>
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <input asp-for="Input.LastName" class="form-control" autocomplete="LastName" aria-required="true" />
+            <label asp-for="Input.LastName"></label>
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <input asp-for="Input.UserId" class="form-control" autocomplete="UserId" aria-required="true" />
+            <label asp-for="Input.UserId"></label>
+            <span asp-validation-for="Input.UserId" class="text-danger"></span>
+        </div>
+
+
+        <div class="col s6">
+            <input asp-for="Input.ExpiryDate" class="form-control" autocomplete="ExpiryDate" aria-required="true" />
+            <label asp-for="Input.ExpiryDate"></label>
+            <span asp-validation-for="Input.ExpiryDate" class="text-danger"></span>
+        </div>
+
+
+        <div class="col s6">
+            <input asp-for="Input.FatherName" class="form-control" autocomplete="FatherName" aria-required="true" />
+            <label asp-for="Input.FatherName"></label>
+            <span asp-validation-for="Input.FatherName" class="text-danger"></span>
+        </div>
+
+
+        <div class="col s6">
+            <select asp-for="Input.Dab" required class="browser-default" style="">
+                <option value="0">PUBLIC</option>
+                <option value="1">DAB</option>
+            </select>
+            <label asp-for="Input.Dab"></label>
+            <span asp-validation-for="Input.Dab" class="text-danger"></span>
+        </div>
+
+
+        <div class="col s6">
+            <input asp-for="Input.RegisterDate" class="form-control" autocomplete="RegisterDate" aria-required="true" />
+            <label asp-for="Input.RegisterDate"></label>
+            <span asp-validation-for="Input.RegisterDate" class="text-danger"></span>
+        </div>
+
+
+        <div class="col s6">
+            <input asp-for="Input.IpAddress" class="form-control" autocomplete="IpAddress" aria-required="true" />
+            <label asp-for="Input.IpAddress"></label>
+            <span asp-validation-for="Input.IpAddress" class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <input asp-for="Input.Designation" class="form-control" autocomplete="Designation" aria-required="true" />
+            <label asp-for="Input.Designation"></label>
+            <span asp-validation-for="Input.Designation" class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
+            <label asp-for="Input.PhoneNumber"></label>
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <select id="BankId" name="BankId" onchange='getSelectItems( "#DepartmentId", "/api/SysConfiguration/getDepartments",0, this.value );'>
+            </select>
+            <label>Bank</label>
+            <span class="text-danger"></span>
+        </div>
+
+        <div class="col s6">
+            <select id="DepartmentId" asp-for="Input.DepartmentId">
+                <option value="0">Select Department</option>
+            </select>
+            <label asp-for="Input.DepartmentId"></label>
+            <span asp-validation-for="Input.DepartmentId" class="text-danger"></span>
+        </div>
+        <div class="col s6">
+            <select id="StatusId" asp-for="Input.StatusId">
+                <option value="0">Select Status</option>
+            </select>
+            <label asp-for="Input.StatusId"></label>
+            <span asp-validation-for="Input.StatusId" class="text-danger"></span>
+        </div>
+
+
+        <div class="col s6">
+            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+            <label asp-for="Input.Password"></label>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="col s6">
+            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+            <label asp-for="Input.ConfirmPassword"></label>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="col s12 mt-2">
+            <button id="registerSubmit" type="submit" class="btn blue" style="width:150px">Register</button>
+            <a href="/UserRole" class="btn grey" style="width:150px">Users List</a>
+        </div>
+    </form>
+</div>*@
+
+@*@section css{
+    <link href="~/Content/plugins/selectize/selectize.min.css" rel="stylesheet" />
+}
+    <script>
+        const updateSelect = element => {
+            $(element).selectize({
+                create: false,
+                sortField: "text",
+            })
+        }
+        const getSelectItems = function (element, apiUrl, id, pid) {
+          
+            $(element).html(`<option value="0">loading</option>`)
+            let htmlRelation = ''
+            $.ajax(apiUrl + '?id=' + id + '&pid=' + pid).then(res => {
+                htmlRelation += `<option value="0">select one</option>`
+                res.map(item => {
+                    if (item.id == id) {
+                        htmlRelation += `<option value='${item.id}' selected='selected'>${item.name}</option>`
+                    } else {
+
+                        htmlRelation += `<option value='${item.id}'>${item.name}</option>`
+                    }
+                })
+                $(element).selectize()[0].selectize.destroy();
+                $(element).html(htmlRelation)
+                updateSelect(element)
+            })
+
+        }
+
+
+        $( document ).ready( function () {
+            getSelectItems( "#BankId", "/api/SysConfiguration/getBanks", 0, 0 );
+            getSelectItems( "#StatusId", "/api/SysConfiguration/getStatuss", 0, 0 );
+        } );
+
+
+            $(document).ready(function(){
+                $('select').formSelect();
+                });
+    </script>
+}
+*@
+
+
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+

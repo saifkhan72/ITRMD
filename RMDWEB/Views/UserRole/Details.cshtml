@@ -1,0 +1,80 @@
+﻿@model ApplicationUser
+
+@{
+	ViewBag.Title = "User details";
+	ViewBag.Active = "dab_users"; ;
+}
+
+<!-- start page title -->
+<div class="row">
+	<div class="col-12">
+		<div class="page-title-box d-flex align-items-center justify-content-between">
+			<div class="page-title">
+				<h4 class="mb-0 font-size-18">User Details</h4>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+					<li class="breadcrumb-item"><a asp-action="Index" asp-controller="UserRole">Users</a></li>
+					<li class="breadcrumb-item active">User Details</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<!-- Demo purpose only -->
+					<div style="min-height: 200px;">
+						<div class="row">
+                            <div class="col-12">
+                                <h3>User Details</h3>
+                            </div>
+                            <div class="col-12">
+                                <hr/>
+                            </div>
+                        </div>
+						<div class="row">
+							<div class="col-12">
+								<table class="table table-sm">
+								<tr>
+									<th width="20%">User ID</th>
+									<td width="80%" class="pl-5">@Html.DisplayFor(model => model.UserId) </td>
+								</tr>
+								<tr>
+									<th width="20%">Username</th>
+									<td width="80%" class="pl-5">@Html.DisplayFor(model => model.UserName) </td>
+								</tr>
+								<tr>
+									<th width="20%">Father Name</th>
+									<td width="80%" class="pl-5">@Html.DisplayFor(model => model.FatherName) </td>
+								</tr>
+								<tr>
+									<th width="20%">Email</th>
+									<td width="80%" class="pl-5">@Html.DisplayFor(model => model.Email) </td>
+								</tr>
+								<tr>
+									<th width="20%">Phone Number</th>
+									<td width="80%" class="pl-5">@Html.DisplayFor(model => model.PhoneNumber) </td>
+								</tr>
+								<tr>
+									<th width="20%">Expiry Date</th>
+									<td width="80%" class="pl-5">@Html.DisplayFor(model => model.ExpiryDate) </td>
+								</tr>
+							</table>
+							</div>
+							<div class="col-12">
+								<a asp-action="Index" class="btn btn-secondary w-lg mt-3">Back to List</a>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end page content-->
+

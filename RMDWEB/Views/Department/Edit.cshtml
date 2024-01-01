@@ -1,0 +1,79 @@
+﻿@model RMDWEB.Models.DepartmentTbl
+
+@{
+    ViewData["Title"] = (Model.DepartmentId != 0) ? "Update Department" : "Add Department";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h4 class="mb-0 font-size-18">@(Model.DepartmentId != 0 ? "Update" : "Add") Department</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home Page</a></li>
+                    <li class="breadcrumb-item active">@(Model.DepartmentId != 0 ? "Update" : "Add") Department</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="page-content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>@(Model.DepartmentId !=0 ? "Update" : "Add") Department</h4>
+                        </div>
+                        <div class="col-12">
+                            <hr />
+                        </div>
+                    </div>
+                    <form asp-action="Edit" class="row">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="DepartmentId" />
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                <input asp-for="Name" type="text" id="form1Example1" class="form-control" />
+                                <label class="form-label" for="form1Example1">Name</label>
+                            </div>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-4">
+                            <select class="select" asp-for="BankId" asp-items="ViewBag.BankId">                                
+                            </select>
+                            <label class="form-label select-label">Bank</label>
+                        </div>
+                        <div class="col-4">
+                            <select class="select" data-mdb-filter="true" asp-for="StatusId" asp-items="ViewBag.StatusId">
+                            </select>
+                            <label class="form-label select-label">Status</label>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" value="Save" class="btn btn-primary w-lg" />
+                            <a class="btn text-bg-secondary w-lg" asp-action="Index" asp-controller="Department">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page content-->
+@section css{
+    <link href="~/mdb/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/datepicker.min.css" rel="stylesheet" />
+    <link href="~/mdbootstrap/css/modules/select.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/mdb/js/mdb.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/datepicker.min.js"></script>
+    <script src="~/mdbootstrap/js/modules/select.min.js"></script>
+}
+
+
+
